@@ -23,6 +23,7 @@ export class Todo {
         this.Completed = completed;
         this.Owner = owner;
     }
+
 }
 
 export class ErrInvalidOwner extends Error {
