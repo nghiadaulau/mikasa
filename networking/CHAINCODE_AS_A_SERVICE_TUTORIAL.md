@@ -24,13 +24,13 @@ In your 'monitoring' window, run this to watch all activity from the all the doc
 
 ```bash
 # from the fabric-samples repo
-./test-network/monitordocker.sh
+./networking/monitordocker.sh
 ```
 
 In the 'Fabric Network' window, start the test network
 
 ```bash
-cd test-network
+cd networking
 ./network.sh up createChannel -ca
 ```
 
@@ -45,7 +45,7 @@ Note that the order listed isn't mandatory. The key thing is that the containers
 This sequence can be run as follows
 
 ```bash
-./network.sh deployCCAAS  -ccn basicts -ccp ../asset-transfer-basic/chaincode-typescript
+./network.sh deployCCAAS  -ccn basicts -ccp ../transfer/chaincode
 ```
 
 This is very similar to the `deployCC` command, it needs the name, and path. But also needs to have the port the chaincode container is going to use. As each container is on the `fabric-test` network, you might wish to alter this so there are no collisions with other chaincode containers.
@@ -74,7 +74,7 @@ If you don't have `jq` installed omit `| jq`.  The metadata shows the details of
 To run the Java example, change the `deployCCAAS` command as follows. This will create two new containers.
 
 ```bash
-./network.sh deployCCAAS  -ccn basicj -ccp ../asset-transfer-basic/chaincode-java
+./network.sh deployCCAAS  -ccn basicj -ccp ../transfer/chaincode-java
 ```
 
 Note that all the asset-transfer-basic application samples use 'basic' as the chaincode name and need to be adjusted to use the name 'basicts' or 'basicj' accordingly, or you need to use the name 'basic' in the commands above.
@@ -119,10 +119,10 @@ There is an option `-ccaasdocker false` that can be provided on the `deployCCAAS
 Run this command, and you'll see similar output
 
 ```bash
-./network.sh deployCCAAS  -ccn basicj -ccp ../asset-transfer-basic/chaincode-java -ccaasdocker false
+./network.sh deployCCAAS  -ccn basicj -ccp ../transfer/chaincode-java -ccaasdocker false
 #....
 Not building docker image; this the command we would have run
-docker build -f ../asset-transfer-basic/chaincode-java/Dockerfile -t basicj_ccaas_image:latest --build-arg CC_SERVER_PORT=9999 ../asset-transfer-basic/chaincode-java
+docker build -f ../transfer/chaincode-java/Dockerfile -t basicj_ccaas_image:latest --build-arg CC_SERVER_PORT=9999 ../transfer/chaincode-java
 #....
 Not starting docker containers; these are the commands we would have run
     docker run --rm -d --name peer0org1_basicj_ccaas                    --network fabric_test                   -e CHAINCODE_SERVER_ADDRESS=0.0.0.0:9999                   -e CHAINCODE_ID=basicj_1.0:59dcd73a14e2db8eab7f7683343ce27ac242b93b4e8075605a460d63a0438405 -e CORE_CHAINCODE_ID_NAME=basicj_1.0:59dcd73a14e2db8eab7f7683343ce27ac242b93b4e8075605a460d63a0438405                     basicj_ccaas_image:latest
@@ -137,7 +137,7 @@ The first thing needed is to build the docker image. Remember that so long as th
 To manually build the docker image for the `asset-transfer-basic/chaincode-java`
 
 ```bash
-docker build -f ../asset-transfer-basic/chaincode-java/Dockerfile -t basicj_ccaas_image:latest --build-arg CC_SERVER_PORT=9999 ../asset-transfer-basic/chaincode-java
+docker build -f ../transfer/chaincode-java/Dockerfile -t basicj_ccaas_image:latest --build-arg CC_SERVER_PORT=9999 ../transfer/chaincode-java
 ```
 
 ### Starting the docker container

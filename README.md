@@ -35,19 +35,19 @@ Launch the blockchain network
 ---------------
 
 ```shell
-cd test-network
+cd networking
 ```
 If you already have a test network running, bring it down to ensure the environment is clean.
 ```shell
-cd ./network.sh down
+./network.sh down
 ```
 Launch the Fabric test network using the network.sh shell script.
 ```shell
-cd ./network.sh down
+./network.sh up createChannel -c mychannel -ca
 ```
 Deploy the smart contract
 -------------------------
 
 ```shell
-./network.sh deployCC -ccn basic -ccp ../asset-transfer-basic/chaincode-typescript/ -ccl typescript
+./network.sh deployCC -ccn basic -ccp ../transfer/chaincode/ -ccl typescript
 ```
